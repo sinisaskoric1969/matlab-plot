@@ -76,3 +76,14 @@ grid on;
 ylabel("\bf Group Delay (Samples)")
 xlabel("\bf Normalized Frequency")
 hold off
+
+%% 1.6
+% constant group delay means linear relation between phase delay and frequency. 
+%% 2.1
+figure(4)
+h_n=[0.00506, 0, -0.04194, 0, 0.28848, 0.49679, 0.28848, 0, -0.04194, 0, 0.00506];
+stem(0:10,h_n);
+ylabel('Impulse response ')
+xlabel('\bf \fontsize{12} n')
+title('\bf Q(2.1)')
+grid on;
