@@ -87,3 +87,29 @@ ylabel('Impulse response ')
 xlabel('\bf \fontsize{12} n')
 title('\bf Q(2.1)')
 grid on;
+
+%% 2.2
+figure(5)
+
+X2=fft(h_n,1024);
+f2=(0:Fs/2)/Fs;
+Y2=abs(X2);
+phi=unwrap(angle(X2))/pi;
+Y3=20*log10(abs(X2)./max(abs(X2)));
+subplot(211)
+plot(f2,Y3(1:Fs/2+1),'LineWidth',1.2);
+xlabel('\bf Normalized frequency')
+ylabel('\bf \fontsize{12}Impulse response h')
+title('\bf Frequency Response Q(2.2)')
+
+grid on;
+subplot(212)
+plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
+grid on;
+figure(6)
+g = grpdelay(h_n, 1, 1024, 'whole');
+plot(f2,g(1:Fs/2+1));
+ylabel("\bf Group Delay (Samples)")
+xlabel("\bf Normalized Frequency")
+title('\bf Group Delay Q(2.2)')
+p=6;
