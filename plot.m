@@ -54,3 +54,25 @@ grid on;
 leg=legend('M=5','M=21','M=51');
 leg.FontSize=12;
 hold off
+
+%% 1.4
+% The amplitude frequency response consist of several periodic peaks.
+% Meaning that the phase angle are periodic with respect to frequency.
+% The moving filter is an average of a signal over a given window of size M the size of that window is the size  
+
+%% 1.5
+i=0;
+figure(3)
+for M=e
+    
+i=i+1;
+g = grpdelay(ones(1,M)./M, 1, 1024, 'whole');
+plot(f(i,:),g(1:Fs/2+1));
+axis([0 0.5 0 30])
+gtext([num2str(M)]);
+hold on;
+end
+grid on;
+ylabel("\bf Group Delay (Samples)")
+xlabel("\bf Normalized Frequency")
+hold off
