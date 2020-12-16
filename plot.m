@@ -28,3 +28,29 @@ ylabel('Magnitude','FontSize',12)
 grid on;
 leg=legend('M=5','M=21','M=51');
 leg.FontSize=12;
+
+%% 1.2) 
+% 
+% As M increases these frequencies are attenuated further. This is the
+% behaviour of a low pass filter
+%
+%  
+% The zero frequency amplitude is unchanged. It signifies that
+% sum  of the signal values in the window of the average moving filter.
+% From the mathematical point of view it is the fourrier transformation of the
+% response at null frequency
+
+%% 1.3
+% 
+figure(2)
+phi=angle(X)/pi;
+for n=1:i
+plot(f(n,:),phi(n,1:Fs/2+1),'LineWidth',1.2);
+hold on;
+end
+xlabel('Normalized frequency','Fontsize',12);
+ylabel('Phase angle','FontSize',12);
+grid on;
+leg=legend('M=5','M=21','M=51');
+leg.FontSize=12;
+hold off
