@@ -225,3 +225,50 @@ plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
 xlabel('\bf Normalized Frequency')
 ylabel('\bf Phase angle [radian]')
 grid on;
+
+%
+%The amplitude response is a constant 1 meaning all frequency are allowed to pass thus an all pass filter.  
+% however the delays present do modify the input signal.
+p=p+1;
+figure(p);
+g = grpdelay(h34, 1, 1024, 'whole');
+plot(f2,g(1:Fs/2+1));
+ylabel("\bf Group Delay (Samples)");
+xlabel("\bf Normalized Frequency");
+title('\bf Group Delay Q(3.4) ');
+
+%% 3.5
+alpha=-.15;
+b1=[alpha,1];
+a1=[1,alpha];
+a2=[1,1];
+b2=[1,1];
+h35=0.5*(filter(b1,a1,[1,zeros(1,15)])+filter(b2,a2,[1,zeros(1,15)]));
+[A1,w1]=freqz(b1,a1,1024);
+[A2,w2]=freqz(b2,a2,1024);
+X2=0.5*(A1+A2);
+f2=(0:Fs/2)/Fs;
+Y1=abs(X2);
+phi=unwrap(angle(X2))/pi;
+Y3=20*log10(abs(X2)./max(abs(X2)));
+p=p+1;
+figure(p);
+subplot(211)
+plot(f2,(Y3(1:Fs/2+1)),'LineWidth',1.2);
+grid on;
+xlabel('\bf Normalized Frequency')
+ylabel('\bf Amplitude [dB]')
+title('\bf{}')
+subplot(212)
+plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
+xlabel('\bf Normalized Frequency')
+ylabel('\bf Phase angle [radian]')
+grid on;
+p=p+1;
+figure(p);
+g = grpdelay(h35, 1, 1024, 'whole');
+plot(f2,g(1:Fs/2+1));
+ylabel("\bf Group Delay (Samples)");
+xlabel("\bf Normalized Frequency");
+title('\bf Group Delay Q3.5');
+axis([0  .5 -1 5])
