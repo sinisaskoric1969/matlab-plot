@@ -168,3 +168,32 @@ xlabel('\bf n')
 ylabel('\bf impulse response h')
 grid on;
 title('\bf Impulse response Q3.1')
+
+%% 3.2
+[X2,w2]=freqz(b,a,1024);
+f2=(0:Fs/2)/Fs;
+Y2=abs(X2);
+phi=unwrap(angle(X2))/pi;
+Y3=20*log10(abs(X2)./max(abs(X2)));
+p=p+1;
+figure(p);
+
+subplot(211)
+plot(f2,Y3(1:Fs/2+1),'LineWidth',1.2);
+xlabel('\bf Normalized frequency')
+ylabel('\bf \fontsize{12}Amplitude[dB]')
+title('\bf Frequency Response Q3.2')
+grid on;
+subplot(212)
+plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
+grid on;
+
+xlabel('\bf Normalized frequency')
+ylabel('\bf \fontsize{12}Phase delay[rads]')
+p=p+1;
+figure(p);
+g = grpdelay(h31, 1, 1024, 'whole');
+plot(f2,g(1:Fs/2+1));
+ylabel("\bf Group Delay (Samples)");
+xlabel("\bf Normalized Frequency");
+title('\bf Group Delay Q3.2');
