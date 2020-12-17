@@ -113,3 +113,39 @@ ylabel("\bf Group Delay (Samples)")
 xlabel("\bf Normalized Frequency")
 title('\bf Group Delay Q(2.2)')
 p=6;
+
+%% 2.3
+% This is a low pass filter
+% cut off frequency =0.2099Hz
+%% 2.4
+% group delay is a constant 5 samples
+%%  2.5
+p=p+1;
+figure(p);
+k=(-1).^(0:length(h_n)-1);
+h2=k.*h_n;
+X2=fft(h2,1024);
+f2=(0:Fs/2)/Fs;
+Y2=abs(X2);
+phi=unwrap(angle(X2))/pi;
+Y3=20*log10(abs(X2)./max(abs(X2)));
+subplot(211)
+plot(f2,Y3(1:Fs/2+1),'LineWidth',1.2);
+xlabel('\bf Normalized frequency')
+ylabel('\bf \fontsize{12}Impulse response h')
+title('\bf Frequency Response Q(2.5)')
+
+grid on;
+subplot(212)
+plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
+grid on;
+xlabel('\bf Normalized frequency')
+ylabel('\bf \fontsize{12}Phase delay[rads]')
+
+p=p+1;
+figure(p);
+g = grpdelay(h2, 1, 1024, 'whole');
+plot(f2,g(1:Fs/2+1));
+ylabel("\bf Group Delay (Samples)");
+xlabel("\bf Normalized Frequency");
+title('\bf Group Delay Q(2.5)');
