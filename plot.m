@@ -197,3 +197,31 @@ plot(f2,g(1:Fs/2+1));
 ylabel("\bf Group Delay (Samples)");
 xlabel("\bf Normalized Frequency");
 title('\bf Group Delay Q3.2');
+
+%% 3.3 
+% This IIR is a low pass filter and has lower cutoff frequency at .17Hz
+% The group delay is also reduced however it is no longer constant. The
+% amplitude response no longer have minor peaks. The attenuation is havier. 
+%% 3.4
+alpha=-.9
+b=[alpha,1];
+a=[1,alpha];
+h34=filter(b,a,[1,zeros(1,15)]);
+[X2,w2]=freqz(b,a,1024);
+f2=(0:Fs/2)/Fs;
+Y2=abs(X2);
+phi=unwrap(angle(X2))/pi;
+Y3=20*log10(abs(X2)./max(abs(X2)));
+p=p+1;
+figure(p);
+subplot(211)
+plot(f2,abs(X2(1:Fs/2+1)),'LineWidth',1.2);
+grid on;
+xlabel('\bf Normalized Frequency')
+ylabel('\bf Amplitude ')
+title('\bf Q3.4')
+subplot(212)
+plot(f2,phi(1:Fs/2+1),'LineWidth',1.2);
+xlabel('\bf Normalized Frequency')
+ylabel('\bf Phase angle [radian]')
+grid on;
