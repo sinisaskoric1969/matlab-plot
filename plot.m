@@ -149,3 +149,22 @@ plot(f2,g(1:Fs/2+1));
 ylabel("\bf Group Delay (Samples)");
 xlabel("\bf Normalized Frequency");
 title('\bf Group Delay Q(2.5)');
+
+%% 2.6 
+% This is a high pass filter
+%
+% cut off frequency is 2.9Hz
+%
+% Group delay is unchanged to five samples
+%% 3.1 
+% 
+b=[0.206572 0.413144 0.206572];
+a=[0.369527 -0.195816];
+h31=filter(b,a,[1 zeros(1,15)]);
+p=p+1;
+figure(p);
+stem(0:15,h31);
+xlabel('\bf n')
+ylabel('\bf impulse response h')
+grid on;
+title('\bf Impulse response Q3.1')
